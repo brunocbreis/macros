@@ -1,0 +1,435 @@
+--[[ 
+PieChart v1.0 - December 22nd, 2021 
+written by Bruno Reis
+]]--
+
+
+{
+	Tools = ordered() {
+		PieChart = MacroOperator {
+			Inputs = ordered() {
+
+				nestData = InstanceInput {
+					SourceOp = "POSITION",
+					Source = "nestData",
+				},
+
+
+				Percentage = InstanceInput {
+					SourceOp = "PERCENTAGE",
+					Source = "Percentage",
+					Page = "Controls",
+					Default = 25,
+				},
+
+				Offset = InstanceInput {
+					SourceOp = "POSITION",
+					Source = "OffsetPercent",
+					Name = "Offset",
+					Page = "Controls",
+					Default = 0,
+				},
+
+
+				nestColor = InstanceInput {
+					SourceOp = "POSITION",
+					Source = "nestColor",
+				},
+
+
+
+				Type = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "Type",
+				},
+				TopLeftRed = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopLeftRed",
+					Name = "Color",
+					ControlGroup = 6,
+					Default = 0,
+				},
+				TopLeftGreen = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopLeftGreen",
+					ControlGroup = 6,
+					Default = 0,
+				},
+				TopLeftBlue = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopLeftBlue",
+					ControlGroup = 6,
+					Default = 0,
+				},
+				TopLeftAlpha = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopLeftAlpha",
+					ControlGroup = 6,
+					Default = 1,
+				},
+				TopRightSep = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopRightSep",
+				},
+				TopRightRed = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopRightRed",
+					Name = "Top Right",
+					ControlGroup = 8,
+					Default = 0,
+				},
+				TopRightGreen = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopRightGreen",
+					ControlGroup = 8,
+					Default = 0,
+				},
+				TopRightBlue = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopRightBlue",
+					ControlGroup = 8,
+					Default = 0,
+				},
+				TopRightAlpha = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "TopRightAlpha",
+					ControlGroup = 8,
+					Default = 1,
+				},
+				BottomLeftSep = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomLeftSep",
+				},
+				BottomLeftRed = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomLeftRed",
+					Name = "Bottom Left",
+					ControlGroup = 10,
+					Default = 0,
+				},
+				BottomLeftGreen = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomLeftGreen",
+					ControlGroup = 10,
+					Default = 0,
+				},
+				BottomLeftBlue = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomLeftBlue",
+					ControlGroup = 10,
+					Default = 0,
+				},
+				BottomLeftAlpha = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomLeftAlpha",
+					ControlGroup = 10,
+					Default = 1,
+				},
+				BottomRightSep = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomRightSep",
+				},
+				BottomRightRed = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomRightRed",
+					Name = "Bottom Right",
+					ControlGroup = 12,
+					Default = 0,
+				},
+				BottomRightGreen = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomRightGreen",
+					ControlGroup = 12,
+					Default = 0,
+				},
+				BottomRightBlue = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomRightBlue",
+					ControlGroup = 12,
+					Default = 0,
+				},
+				BottomRightAlpha = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "BottomRightAlpha",
+					ControlGroup = 12,
+					Default = 1,
+				},
+				GradientType = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "GradientType",
+				},
+				Start = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "Start",
+					DefaultX = 0,
+					DefaultY = 0.5,
+				},
+				End = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "End",
+					DefaultX = 1,
+					DefaultY = 0.5,
+				},
+				Gradient = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "Gradient",
+				},
+				GradientInterpolationMethod = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "GradientInterpolationMethod",
+				},
+				GradientOffset = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "Offset",
+					Default = 0,
+				},
+				GradientRepeat = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "Repeat",
+				},
+				SubPixel = InstanceInput {
+					SourceOp = "COLOR",
+					Source = "SubPixel",
+				},
+
+
+				nestResolution = InstanceInput {
+					SourceOp = "POSITION",
+					Source = "nestResolution",
+				},
+
+
+					Width = InstanceInput {
+						SourceOp = "COLOR",
+						Source = "Width",
+						Default = 1920,
+					},
+					Height = InstanceInput {
+						SourceOp = "COLOR",
+						Source = "Height",
+						Default = 1080,
+					},
+					AutoResolution = InstanceInput {
+						SourceOp = "COLOR",
+						Source = "UseFrameFormatSettings",
+						Name = "Auto Resolution",
+						Default = 1,
+					},
+
+
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "POSITION",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				PERCENTAGE = Transform {
+					NameSet = true,
+					Inputs = {
+						Angle = Input {
+							Value = -180,
+							Expression = "-180+Percentage/100*180",
+						},
+						Input = Input {
+							SourceOp = "CutSector",
+							Source = "Mask",
+						},
+						Percentage = Input { Value = 25, },
+					},
+					ViewInfo = OperatorInfo {
+						Pos = { 825, 115.5 },
+						Flags = {
+							ShowPic = true
+						}
+					},
+					UserControls = ordered() {
+						Percentage = {
+							INP_MaxAllowed = 100,
+							INP_Integer = false,
+							INPID_InputControl = "SliderControl",
+							INP_MaxScale = 100,
+							INP_Default = 50,
+							INP_MinScale = 0,
+							INP_MinAllowed = 0,
+							LINKID_DataType = "Number",
+							ICS_ControlPage = "Controls",
+							ICD_Center = 50,
+							LINKS_Name = "Percentage"
+						}
+					}
+				},
+				COLOR = Background {
+					NameSet = true,
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Rectangle1",
+							Source = "Mask",
+						},
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+					},
+					ViewInfo = OperatorInfo {
+						Pos = { 935, 214.5 },
+						Flags = {
+							ShowPic = true
+						}
+					},
+				},
+				POSITION = Transform {
+					CtrlWZoom = false,
+					NameSet = true,
+					Inputs = {
+						Angle = Input { Expression = "OffsetPercent/100*-360", },
+						Input = Input {
+							SourceOp = "AdjAngle",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo {
+						Pos = { 1045, 214.5 },
+						Flags = {
+							ShowPic = true
+						}
+					},
+					UserControls = ordered() {
+						OffsetPercent = {
+							INP_MaxAllowed = 100,
+							INP_Integer = false,
+							INPID_InputControl = "SliderControl",
+							INP_MaxScale = 100,
+							INP_Default = 0,
+							INP_MinScale = 0,
+							INP_MinAllowed = 0,
+							LINKID_DataType = "Number",
+							ICS_ControlPage = "Controls",
+							LINKS_Name = "OffsetPercent"
+						},
+
+						nestData = { INP_Integer = true, LBLC_DropDownButton = true, INPID_InputControl = "LabelControl",
+						LBLC_NumInputs = 2, INP_Default = 1, LINKID_DataType = "Number", LINKS_Name = "Data", },
+
+
+						nestColor = { INP_Integer = true, LBLC_DropDownButton = true, INPID_InputControl = "LabelControl",
+						LBLC_NumInputs = 28, INP_Default = 1, LINKID_DataType = "Number", LINKS_Name = "Color", },
+
+						nestResolution = { INP_Integer = true, LBLC_DropDownButton = true, INPID_InputControl = "LabelControl",
+						LBLC_NumInputs = 4, INP_Default = 0, LINKID_DataType = "Number", LINKS_Name = "Resolution", },
+
+						
+					}
+				},
+				AdjAngle = Transform {
+					NameSet = true,
+					Inputs = {
+						Angle = Input { Expression = "-PERCENTAGE.Percentage/100*180", },
+						Input = Input {
+							SourceOp = "Duplicate",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 1045, 181.5 } },
+				},
+				Duplicate = Transform {
+					NameSet = true,
+					Inputs = {
+						Center = Input { Value = { 0, 0.5 }, },
+						Pivot = Input { Value = { 1, 0.5 }, },
+						Edges = Input { Value = 3, },
+						Input = Input {
+							SourceOp = "Offset",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 1045, 148.5 } },
+				},
+				Rectangle1 = RectangleMask {
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "Ellipse1",
+							Source = "Mask",
+						},
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						PaintMode = Input { Value = FuID { "Subtract" }, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+						Center = Input { Value = { 0.75, 0.5 }, },
+						Height = Input { Value = 1, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 825, 214.5 } },
+				},
+				Offset = Transform {
+					NameSet = true,
+					Inputs = {
+						Center = Input { Value = { 1, 0.5 }, },
+						Input = Input {
+							SourceOp = "Merge1",
+							Source = "Output",
+						},
+					},
+					ViewInfo = OperatorInfo { Pos = { 1045, 115.5 } },
+				},
+				Merge1 = Merge {
+					Inputs = {
+						EffectMask = Input {
+							SourceOp = "PERCENTAGE",
+							Source = "Output",
+						},
+						ApplyMaskInverted = Input { Value = 1, },
+						Background = Input {
+							SourceOp = "TranspBG",
+							Source = "Output",
+						},
+						Foreground = Input {
+							SourceOp = "COLOR",
+							Source = "Output",
+						},
+						PerformDepthMerge = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 935, 115.5 } },
+				},
+				Ellipse1 = EllipseMask {
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 715, 214.5 } },
+				},
+				CutSector = RectangleMask {
+					NameSet = true,
+					Inputs = {
+						Filter = Input { Value = FuID { "Fast Gaussian" }, },
+						PaintMode = Input { Value = FuID { "Subtract" }, },
+						MaskWidth = Input { Value = 1920, },
+						MaskHeight = Input { Value = 1080, },
+						PixelAspect = Input { Value = { 1, 1 }, },
+						ClippingMode = Input { Value = FuID { "None" }, },
+						Center = Input { Value = { 0.75, 1 }, },
+						Height = Input { Value = 3, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 715, 115.5 } },
+				},
+				TranspBG = Background {
+					NameSet = true,
+					Inputs = {
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						TopLeftAlpha = Input { Value = 0, },
+					},
+					ViewInfo = OperatorInfo { Pos = { 935, 82.5 } },
+				}
+			},
+		}
+	},
+	ActiveTool = "PieChart"
+}

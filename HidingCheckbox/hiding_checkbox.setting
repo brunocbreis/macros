@@ -1,0 +1,92 @@
+{
+	Tools = ordered() {
+		MacroTool5 = GroupOperator {
+			Inputs = ordered() {
+				Input5 = InstanceInput {
+					SourceOp = "Background1",
+					Source = "Hide",
+				},
+				
+				Label = InstanceInput { 
+				SourceOp = "Background1", 
+				Source = "Label", 
+				Name = "Name", 
+				Page = "Controls", 
+				},
+				
+				Input1 = InstanceInput {
+					SourceOp = "Background1",
+					Source = "TopLeftRed",
+					Name = "Color",
+					ControlGroup = 1,
+					Default = 0,
+				},
+				Input2 = InstanceInput {
+					SourceOp = "Background1",
+					Source = "TopLeftGreen",
+					ControlGroup = 1,
+					Default = 0,
+				},
+				Input3 = InstanceInput {
+					SourceOp = "Background1",
+					Source = "TopLeftBlue",
+					ControlGroup = 1,
+					Default = 0,
+				},
+				Input4 = InstanceInput {
+					SourceOp = "Background1",
+					Source = "TopLeftAlpha",
+					ControlGroup = 1,
+					Default = 1,
+				},
+				
+			},
+			Outputs = {
+				MainOutput1 = InstanceOutput {
+					SourceOp = "Background1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = GroupInfo { Pos = { 0, 0 } },
+			Tools = ordered() {
+				Background1 = Background {
+					CtrlWZoom = false,
+					Inputs = {
+						Width = Input { Value = 1920, },
+						Height = Input { Value = 1080, },
+						UseFrameFormatSettings = Input { Value = 1, },
+						["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+						Label = Input { Expression = "iif(Input5 == 1,1,0)", },
+					},
+					ViewInfo = OperatorInfo { Pos = { 220, 148.5 } },
+					UserControls = ordered() {
+						Hide = {
+							LINKS_Name = "Hide",
+							LINKID_DataType = "Number",
+							INPID_InputControl = "CheckboxControl",
+							INP_Integer = false,
+							CBC_TriState = false,
+							INP_Passive = false,
+						},
+						Label = {
+							LINKS_Name = "Label",
+							LINKID_DataType = "Number",
+							INPID_InputControl = "LabelControl",
+							INP_Integer = false,
+							INP_MinScale = 0,
+							INP_MaxScale = 1,
+							INP_MinAllowed = -1000000,
+							INP_MaxAllowed = 1000000,
+							LBLC_DropDownButton = true,
+							LBLC_NumInputs = 4,
+							LBLC_NestLevel = 1,
+							INP_Passive = false,
+							IC_Visible = false,
+						}
+					}
+				}
+			},
+		}
+	},
+	ActiveTool = "MacroTool5"
+}
